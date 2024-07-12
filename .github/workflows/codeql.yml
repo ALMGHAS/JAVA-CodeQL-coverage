@@ -95,8 +95,18 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: coverage-report
-        path: target/site/jacoco/jacoco.xml    
+        path: target/site/jacoco/jacoco.xml   
+        
+    - name: Upload to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: target/site/jacoco/jacoco.xml
+        flags: unittests
+        name: codeql-coverage
+        fail_ci_if_error: true    
 
+    
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
       with:
