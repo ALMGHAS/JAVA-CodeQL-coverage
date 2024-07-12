@@ -87,6 +87,16 @@ jobs:
         echo '  make release'
         exit 1
 
+    - name: Run tests with coverage
+      run: |
+        mvn clean test jacoco:report
+
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v2
+      with:
+        name: coverage-report
+        path: target/site/jacoco/jacoco.xml    
+
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
       with:
