@@ -1,4 +1,4 @@
-#codeql
+#codeql coverage
 name: "CodeQL"
 
 on:
