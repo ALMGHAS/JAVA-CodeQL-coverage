@@ -1,4 +1,3 @@
-#codeql coverage
 name: "CodeQL"
 
 on:
@@ -34,15 +33,15 @@ jobs:
     - name: Autobuild
       uses: github/codeql-action/autobuild@v1
 
-    - name: Build and run tests with coverage
+    - name: Run tests with coverage
       run: |
-        ./gradlew clean test jacocoTestReport
+        mvn clean test jacoco:report
 
     - name: Upload coverage report
       uses: actions/upload-artifact@v2
       with:
         name: coverage-report
-        path: build/reports/jacoco/test/jacocoTestReport.xml
+        path: target/site/jacoco/jacoco.xml
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
